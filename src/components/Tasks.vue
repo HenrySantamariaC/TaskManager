@@ -19,7 +19,7 @@
             </v-row>
             <v-row class="my-0 d-flex flex-row align-center">
               <v-col cols="9">
-                <v-text-field label="Nueva tarea" v-model="note"></v-text-field>
+                <v-text-field color="indigo" label="Nueva tarea" v-model="note"></v-text-field>
               </v-col>
               <v-col cols="3" class="d-flex justify-center">
                 <v-btn @click="add(note)" fab dark small color="indigo">
