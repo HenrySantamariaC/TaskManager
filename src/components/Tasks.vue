@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="d-flex justify-center">
       <v-col cols="12" sm="9" md="6">
-        <v-card color="#fff" light>
+        <v-card color="theme--dark" dark>
           <v-container class="d-flex flex-column">
             <v-row class="ma-sm-4">
               <v-col cols="8" class="d-flex flex-row">
@@ -28,16 +28,21 @@
               </v-col>
             </v-row>
             <v-row class="d-flex flex-column justify-center">
-              <v-list rounded>
-                <v-list-item-group>
-                  <v-list-item  light v-for="(item, i) in items" :key="i" @click="isTaskCompleted(i)" :class="{'indigo':items[i].isCompleted}">
+              <v-list rounded three-line flat class="mx-2">
+                <v-list-item-group multiple>
+                  <v-list-item dark v-for="(item, i) in items" :key="i" :class="{'indigo':items[i].isCompleted}">
                     <v-list-item-icon class="ma-auto">
-                      <v-icon :class="{'white--text':item.isCompleted}" v-text="iconCompleted(i)"></v-icon>
+                      <v-icon @click="isTaskCompleted(i)" v-text="iconCompleted(i)"></v-icon>
                     </v-list-item-icon> 
                     <v-list-item-content class="ml-2">
-                      <v-list-item-title :class="{'white--text':item.isCompleted}" v-text="item.title"></v-list-item-title>
-                      <v-list-item-subtitle :class="{'white--text':items.isCompleted}" v-text="item.description"></v-list-item-subtitle>
+                      <router-link :to="{name: 'Task', params: {id:item}}">
+                        <v-list-item-title v-text="item.title"></v-list-item-title>
+                        <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>  
+                      </router-link>
                     </v-list-item-content>
+                    <v-list-item-icon class="ma-auto">
+                      <v-icon @click="taskDelete(i)">mdi-trash-can</v-icon>
+                    </v-list-item-icon> 
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
@@ -64,7 +69,7 @@ export default {
       selectedItem: 1,
       items: [
         { title: 'Real-Time', description: 'Description', isCompleted: false },
-        { title: 'Audience', description: 'Description', isCompleted: false },
+        { title: 'Audience', description: 'Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas praesentium fugit doloremque rerum impedit at consequaturs.', isCompleted: false },
       ],
     };
   },
@@ -109,21 +114,26 @@ export default {
         return 'mdi-note-alert'
       }
     },
+    taskDelete(i){
+      this.items.splice(i,1)
+    },
     add(titleM){
       if (titleM !== '') {
         let task = { title: titleM, description: 'Description', isCompleted: false}
         this.items.push(task)
         this.note=''
       }else{
-        alert('El titulo no puede se vacio')
+        alert('El titulo no puede estar vacio')
       }
     }
-  },
-  computed: {
-    
   },
   created() {
     this.cargarFechaActual();
   },
 };
 </script>
+<style scoped>
+  a  {
+    text-decoration: none;
+  }
+</style>

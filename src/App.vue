@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="blue"
+      color="indigo"
       dark
     >
       <div class="d-flex align-center">
@@ -37,7 +37,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-main class="grey lighten-3">
+    <v-main class="theme--dark">
       <router-view/>
     </v-main>
   </v-app>
